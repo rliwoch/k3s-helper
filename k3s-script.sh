@@ -41,7 +41,8 @@ if [ "$MODE" == "master" ]; then
     chmod 777 /usr/bin/k9s
     rm -rf /home/ubuntu/k9s
 
-    MASTER_NODE=`kubectl get nodes --selector=node-role.kubernetes.io/master -o name`
+    MASTER_NODE=$(kubectl get nodes --selector=node-role.kubernetes.io/master -o name)
+    echo $MASTER_NODE
     kubectl taint node $MASTER_NODE node-role.kubernetes.io/master:NoSchedule
 
     echo "On the node please run:"
